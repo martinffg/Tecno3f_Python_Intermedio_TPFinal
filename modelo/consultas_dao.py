@@ -4,32 +4,77 @@ from .coneciondb import Conneccion
 def crear_tabla():
     conn = Conneccion()
 
-    sql = """
+    sqlContinente = """
+        CREATE TABLE IF NOT EXISTS Continente (
+	        Id INTEGER NOT NULL,
+	        Nombre TEXT,
+	        PRIMARY KEY(Id AUTOINCREMENT)
+        );
+    """
+    sqlPais = """
+        CREATE TABLE IF NOT EXISTS Pais (
+	        Id INTEGER NOT NULL,
+	        Nombre TEXT,
+	        Continente INTEGER,
+	        PRIMARY KEY(Id AUTOINCREMENT),
+	        FOREIGN KEY(Continente) REFERENCES Continente(Id)
+        );
+    """
+    sqlDirector = """
+        CREATE TABLE IF NOT EXISTS Director (
+	        Id INTEGER NOT NULL,
+	        Nombre TEXT,
+	        Pais INTEGER,
+	        PRIMARY KEY(Id AUTOINCREMENT),
+	        FOREIGN KEY(Pais) REFERENCES Pais(Id)
+        );
+    """
+
+    sqlEstudio = """
+        CREATE TABLE IF NOT EXISTS Estudio (
+	        Id INTEGER NOT NULL,
+	        Nombre TEXT,
+	        Pais INTEGER,
+	        PRIMARY KEY(Id AUTOINCREMENT),
+	        FOREIGN KEY(Pais) REFERENCES Pais(Id)
+        );
+    """
+    sqlGenero = """
         CREATE TABLE IF NOT EXISTS Genero(
         ID INTEGER NOT NULL,
         Nombre VARCHAR(50),
         PRIMARY KEY (ID AUTOINCREMENT)
         );
-"""
-
-    sql2 = """
-    CREATE TABLE IF NOT EXISTS Peliculas(
+    """
+    sqlPeliculas = """
+        CREATE TABLE IF NOT EXISTS Peliculas(
             ID INTEGER NOT NULL,
             Nombre VARCHAR(150),
             Duracion VARCHAR(4),
             Genero INTEGER,
+            AnioEstreno VARCHAR(4),
+	        Director INTEGER,
+	        Estudio INTEGER,
+	        Pais INTEGER,
             PRIMARY KEY (ID AUTOINCREMENT),
-            FOREIGN KEY (Genero) REFERENCES Genero(ID)
+            FOREIGN KEY(Director) REFERENCES Director(Id),
+	        FOREIGN KEY(Estudio) REFERENCES Estudio(Id),
+	        FOREIGN KEY(Genero) REFERENCES Genero(ID),
+	        FOREIGN KEY(Pais) REFERENCES Pais(Id)
             );
     """
+
     try:
-        conn.cursor.execute(sql)
-        conn.cerrar_con()
         conn = Conneccion()
-        conn.cursor.execute(sql2)
+        conn.cursor.execute(sqlContinente)
+        conn.cursor.execute(sqlPais)
+        conn.cursor.execute(sqlDirector)
+        conn.cursor.execute(sqlEstudio)
+        conn.cursor.execute(sqlGenero)
+        conn.cursor.execute(sqlPeliculas)
         conn.cerrar_con()
-    except:
-        pass
+    except Exception as e:
+        print(f"Ha ocurrido un error. {e}")
 
 
 class Peliculas:
@@ -57,8 +102,8 @@ def guardar_peli(pelicula):
     try:
         conn.cursor.execute(sql)
         conn.cerrar_con()
-    except:
-        pass
+    except Exception as e:
+        print(f"Ha ocurrido un error. {e}")
 
 
 def listar_peli():
@@ -79,8 +124,8 @@ def listar_peli():
         conn.cerrar_con()
         # print(listar_peliculas)
         return listar_peliculas
-    except:
-        pass
+    except Exception as e:
+        print(f"Ha ocurrido un error. {e}")
 
 
 def listar_generos():
@@ -96,8 +141,8 @@ def listar_generos():
         conn.cerrar_con()
 
         return listar_genero
-    except:
-        pass
+    except Exception as e:
+        print(f"Ha ocurrido un error. {e}")
 
 
 def listar_directores():
@@ -113,8 +158,8 @@ def listar_directores():
         conn.cerrar_con()
 
         return listar_director
-    except:
-        pass
+    except Exception as e:
+        print(f"Ha ocurrido un error. {e}")
 
 
 def listar_estudios():
@@ -130,8 +175,8 @@ def listar_estudios():
         conn.cerrar_con()
 
         return listar_estudio
-    except:
-        pass
+    except Exception as e:
+        print(f"Ha ocurrido un error. {e}")
 
 
 def listar_paises():
@@ -147,8 +192,8 @@ def listar_paises():
         conn.cerrar_con()
 
         return listar_pais
-    except:
-        pass
+    except Exception as e:
+        print(f"Ha ocurrido un error. {e}")
 
 
 def editar_peli(pelicula, id):
@@ -163,8 +208,8 @@ def editar_peli(pelicula, id):
     try:
         conn.cursor.execute(sql)
         conn.cerrar_con()
-    except:
-        pass
+    except Exception as e:
+        print(f"Ha ocurrido un error. {e}")
 
 
 def borrar_peli(id):
@@ -178,5 +223,5 @@ def borrar_peli(id):
     try:
         conn.cursor.execute(sql)
         conn.cerrar_con()
-    except:
-        pass
+    except Exception as e:
+        print(f"Ha ocurrido un error. {e}")
