@@ -1,13 +1,8 @@
-# \# Tecno3f - Python Intermedio
+\#  Tecno3f - # Python Intermedio - TP Final
 
-# \# TP Final
+# Alumno: Martín F. Fernández Gamen
+# Mail: martinffg@gmail.com
 
-# \## Alumno: Martín F. Fernández Gamen
+\# Modo de uso del programa:   Ver requirements.txt
 
-# \## Mail: martinffg@gmail.com
-
-# 
-
-# \## Modo de uso del programa:
-!!!! IMPORTANTE !!!! MANUAL DEL USUARIO EN DESARROLLO EN ESTE ARCHIVO. SE ENTREGARÁ ASAP.
 
