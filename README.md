@@ -16,6 +16,9 @@ Luego una vez situado en la raíz del proyecto / carpeta del venv correr:
 
 Esto abrirá la ventana del programa de CRUD sobre la DDBB peliculas.db integrada al proyecto.
 
+# Backup de la DB y tablas en csv
+Se encuentran dentro de la carpeta ddbb/Backup_DB y ddbb/Backup_tables
+
 ## Creando venv y requeriments.txt en Windows:
 > py -m venv Test_Entorno           -> creo el venv
 > .\Test_Entorno\Scripts\activate   -> activo el venv
