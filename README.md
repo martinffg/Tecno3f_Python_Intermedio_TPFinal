@@ -9,4 +9,5 @@
 # 
 
 # \## Modo de uso del programa:
+!!!! IMPORTANTE !!!! MANUAL DEL USUARIO EN DESARROLLO EN ESTE ARCHIVO. SE ENTREGARÁ ASAP.
 
